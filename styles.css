@@ -1,0 +1,488 @@
+:root {
+    --bg-color: #0a0a0a;
+    --text-main: #ffffff;
+    --text-muted: #e0e0e0;
+    --accent: #4ade80; /* Verde neón tecnológico */
+    --card-bg: #171717;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth; 
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 0 5%;
+    overflow-x: hidden;
+}
+
+/* --- ANIMACIONES GLOBALES --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes panGrid {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+}
+
+/* --- VESTÍBULO (HERO) --- */
+.hero {
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 2fr 0.9fr;
+    align-items: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -5vw; width: 110vw; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    animation: panGrid 15s linear infinite;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%);
+}
+
+.hero-content { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.hero h1 {
+    font-size: 6rem;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+/* --- BOTONES --- */
+.btn-group {
+    display: flex; 
+    gap: 16px; 
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.btn {
+    padding: 14px 28px; 
+    font-size: 1rem; 
+    font-weight: 600;
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary { 
+    background-color: var(--accent); 
+    color: #000; 
+    border: 2px solid var(--accent); 
+}
+
+.btn-primary:hover { 
+    background-color: transparent; 
+    color: var(--accent); 
+}
+
+.btn-secondary { 
+    background-color: transparent; 
+    color: var(--text-main); 
+    border: 2px solid #444; 
+}
+
+.btn-secondary:hover { 
+    border-color: var(--accent); 
+    color: var(--accent); 
+}
+
+/* --- ANIMACIÓN UX ABSTRACTA (3D) --- */
+.hero-animation {
+    position: relative; 
+    height: 400px; 
+    perspective: 1000px;
+    opacity: 0; 
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.ui-card {
+    background-color: var(--card-bg); 
+    border: 1px solid #333; 
+    border-radius: 8px;
+    padding: 24px; 
+    position: absolute; 
+    width: 300px;
+    box-shadow: -20px 20px 40px rgba(0,0,0,0.5);
+    transform: rotateX(25deg) rotateY(-25deg) rotateZ(5deg);
+}
+
+@keyframes floatUI {
+    0%, 100% { transform: rotateX(25deg) rotateY(-25deg) rotateZ(5deg) translateY(0px); }
+    50% { transform: rotateX(25deg) rotateY(-25deg) rotateZ(5deg) translateY(-20px); }
+}
+
+.card-1 { 
+    top: 20px; 
+    right: 0px; 
+    animation: floatUI 6s ease-in-out infinite; 
+}
+
+.card-2 { 
+    bottom: 40px; 
+    left: 20px; 
+    background-color: #111; 
+    border-color: var(--accent); 
+    z-index: 2; 
+    animation: floatUI 6s ease-in-out infinite 3s; 
+}
+
+.ui-skeleton { background-color: #333; border-radius: 4px; margin-bottom: 12px; }
+.ui-skeleton.header { height: 32px; width: 100%; margin-bottom: 24px; }
+.ui-skeleton.row { height: 12px; }
+.ui-skeleton.button { height: 36px; width: 100%; background-color: var(--accent); opacity: 0.8; margin-bottom: 0; margin-top: 20px; }
+
+.w-100 { width: 100%; } 
+.w-70 { width: 70%; } 
+.w-60 { width: 60%; } 
+.w-50 { width: 50%; }
+
+.ui-flex { display: flex; gap: 16px; align-items: center; }
+.ui-circle { width: 48px; height: 48px; border-radius: 50%; background-color: #333; }
+.ui-lines { flex: 1; }
+.ui-lines .row:last-child { margin-bottom: 0; }
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 16px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- SECCIÓN: PROYECTOS (EFECTO COVERFLOW EXACTO) --- */
+.carousel-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding: 60px 0 20px 0; /* Menos padding abajo para acercar los puntos */
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    
+    /* Cálculo maestro actualizado: 50% menos la mitad de la NUEVA tarjeta (175px) */
+    padding: 60px calc(50% - 175px); 
+    
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none; 
+}
+
+.card {
+    flex: 0 0 450px; /* Tarjetas más anchas */
+    height: 500px;   /* Tarjetas más altas */
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    scroll-snap-align: center;
+    
+    opacity: 0.35;
+    transform: scale(0.85);
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card.card-center {
+    opacity: 1;
+    transform: scale(1.1); /* Hace que la central se vea enorme */
+    z-index: 2;
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8); 
+}
+
+.card.active {
+    /* Estado activo (Tarjeta central según tu imagen) */
+    opacity: 1;
+    transform: scale(1.1); /* Escala por encima del 100% para dar profundidad */
+    z-index: 2;
+    border: 2px solid var(--accent); /* Tu borde verde */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8); /* Sombra pesada para separarla del fondo */
+}
+
+.card:hover {
+    border-color: var(--accent);
+}
+
+.card-img {
+    height: 250px;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 20px;
+}
+
+.card-content { padding: 24px; }
+.card-tags { font-size: 0.8rem; color: var(--accent); margin-bottom: 8px; font-family: monospace; }
+.card-title { font-size: 1.5rem; margin-bottom: 12px; }
+.card-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- PUNTOS (DOTS) --- */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #444; /* Gris apagado por defecto */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: var(--accent); /* Cambia a verde neón */
+    width: 16px; /* Se hace ligeramente más grande */
+    height: 16px;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.4); /* Resplandor sutil */
+}
+
+/* --- SECCIÓN: SOBRE MÍ --- */
+.about {
+    padding: 100px 0;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 60px; 
+    align-items: start;
+}
+
+.bio-text p { 
+    font-size: 1.1rem; 
+    color: var(--text-muted); 
+    margin-bottom: 20px; 
+}
+
+.bio-text strong { 
+    color: var(--text-main); 
+    font-weight: 600; 
+}
+
+.skills-container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+}
+
+.skill-tag {
+    background-color: transparent; 
+    border: 1px solid #444; 
+    color: var(--text-main);
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    font-size: 0.9rem; 
+    letter-spacing: 0.5px;
+}
+
+/* --- SECCIÓN: CONTACTO & FOOTER --- */
+.contact {
+    padding: 100px 0 40px 0; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    border-top: 1px solid #222;
+}
+
+.contact-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 32px; 
+    margin-bottom: 80px; 
+}
+
+.contact-text { 
+    font-size: 1.5rem; 
+    color: var(--text-muted); 
+    max-width: 600px; 
+}
+
+.contact-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 24px; 
+    align-items: flex-start; 
+}
+
+.contact-main { 
+    font-size: 1.25rem; 
+    padding: 16px 32px; 
+}
+
+.social-group { 
+    display: flex; 
+    gap: 16px; 
+}
+
+.footer-bottom {
+    border-top: 1px solid #222; 
+    padding-top: 24px; 
+    text-align: center; 
+    color: #555; 
+    font-size: 0.9rem;
+}
+
+/* --- CONTENEDOR DE TEXTO Y BOTÓN --- */
+.card-content { 
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    height: 250px; /* Ajusta la altura si necesitas más o menos espacio */
+}
+
+.card-desc { 
+    color: rgb(179, 182, 184); /* El mismo gris de tus textos secundarios */
+    font-size: 14px; 
+    font-family: 'Be Vietnam Pro', sans-serif;
+    margin-bottom: auto; /* Este margen automático empuja el botón hacia el fondo */
+}
+
+/* --- ESTILO DE BOTÓN USANDO TU VARIABLE DE ACENTO --- */
+.btn-card {
+    display: block; 
+    margin-top: 20px;
+    padding: 12px 0;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    
+    background-color: transparent; 
+    color: #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 6px; 
+    transition: all 0.3s ease;
+}
+
+/* --- HOVER CON LA VARIABLE GLOBAL DE TU PORTFOLIO --- */
+.btn-card:hover {
+    background-color: rgba(1, 3, 0, 0.15); /* O puedes usar var(--accent) si la tienes definida así */
+    border-color: var(--accent, #72DA38); 
+    color: var(--accent, #72DA38); 
+    box-shadow: 0 0 15px rgb(55, 58, 53); 
+}
+
+/* --- CONTENEDOR DE LA IMAGEN EN LA TARJETA --- */
+.card-img {
+    width: 100%;
+    height: 250px; /* La mitad superior exacta de los 500px totales de la tarjeta */
+    overflow: hidden; /* Oculta cualquier excedente si la foto es muy grande */
+    background-color: #0f0f0f; /* Fondo oscuro por si la imagen carga lento */
+}
+
+/* --- AJUSTE PERFECTO DE LA IMAGEN --- */
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantiene la proporción de la foto recortando los bordes si es necesario, sin deformarla */
+    display: block;
+}
+
+/* --- ESTILO DE BOTÓN PRINCIPAL ("Mi CV" / "Sobre mí") --- */
+.btn-main {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    
+    background-color: transparent; 
+    color: #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 6px; 
+    transition: all 0.3s ease;
+}
+
+/* --- HOVER INTERACTIVO --- */
+.btn-main:hover {
+    background-color: rgba(1, 3, 0, 0.15); /* O puedes usar var(--accent) si la tienes definida así */
+    border-color: var(--accent, #72DA38); 
+    color: var(--accent, #72DA38); 
+    box-shadow: 0 0 15px rgb(55, 58, 53); 
+}
+@media (max-width: 850px) {
+    .card {
+        flex: 0 0 260px; 
+    }
+    .carousel-track {
+        padding: 60px calc(50% - 130px);
+    }
+}
+@media (max-width: 600px) {
+    .social-group { 
+        flex-direction: column; 
+        width: 100%; 
+    }
+    .social-group .btn { text-align: center; }
+    .contact-main { 
+        width: 100%; 
+        text-align: center; 
+    }
+    .hero h1 { font-size: 3rem; }
+}
